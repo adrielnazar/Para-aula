@@ -1,4 +1,5 @@
-#Usei esse código no Google Colab, mas antes passei o codigo "pip install tensorflow==2.7.0." para não ter nenhum erro.
+#Usei esse código no Google Colab, mas antes passei o codigo "pip install tensorflow==2.7.0." para não ter nenhum erro. 
+# (Não é um problema sério, só algumas marcas amarelas que estavam me incomodando)
 
 # Inportação das bibliotecas
 from sklearn.preprocessing import LabelBinarizer
