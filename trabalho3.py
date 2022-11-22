@@ -1,4 +1,5 @@
 import pandas as pd
+import plotly.express as px
 numerics = ['int16', 'int32', 'int64', 'float16', 'float32', 'float64']
 df=pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00616/Tetuan%20City%20power%20consumption.csv")
 df1 = df.select_dtypes(include=numerics)
@@ -11,7 +12,15 @@ print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 print(df1.median())
 print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nA moda do banco de dados.\n')
 print(df1.mode())
-print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nA aplicação do query.\n')
-print(df.query('Temperature < 6'))
-print(df.query('Humidity   > 80'))
-print(df.query('Wind Speed > 1'))
+print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nA aplicação do query.\n\nTemperature < 4.30 | Humidity   > 80 & (`Zone 3  Power Consumption` < 28000.00000  & \n`Zone 2  Power Consumption` < 16500.00000 & `Zone 1 Power Consumption` > 26000.00000 )\n')
+print(df.query('Temperature < 4.30 | Humidity   > 80 & (`Zone 3  Power Consumption` < 28000.00000  & `Zone 2  Power Consumption` < 16500.00000 & `Zone 1 Power Consumption` > 26000.00000 )'))
+print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n')
+df1[['Mês', 'Dia', 'Hora']] = df['DateTime'].str.rsplit('/', expand=True)
+df1[['Ano', 'Hora']] = df1['Hora'].str.rsplit(' ', expand=True, n=1)
+print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nGrafico de histograma.\n')
+fig = px.histogram(df, x='Zone 1 Power Consumption')
+fig.show()
+
+print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nGrafico de linha.\n')
+fig = px.line(df1, x='Mês', y='Zone 2  Power Consumption', color='Ano')
+fig.show()
