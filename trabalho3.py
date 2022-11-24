@@ -17,10 +17,9 @@ print(df.query('Temperature < 4.30 | Humidity   > 80 & (`Zone 3  Power Consumpti
 print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n')
 df1[['Mês', 'Dia', 'Hora']] = df['DateTime'].str.rsplit('/', expand=True)
 df1[['Ano', 'Hora']] = df1['Hora'].str.rsplit(' ', expand=True, n=1)
-print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nGrafico de histograma.\n')
 fig = px.histogram(df, x='Zone 1 Power Consumption')
 fig.show()
 
 print('\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\nGrafico de linha.\n')
-fig = px.line(df1, x='Mês', y='Zone 2  Power Consumption', color='Ano')
+fig = px.line(df1, x='Mês', y='Zone 3  Power Consumption', color='Ano')
 fig.show()
